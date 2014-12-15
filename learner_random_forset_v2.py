@@ -6,6 +6,8 @@ if __name__ == "__main__":
     X_train, y_train = datasets.load_svmlight_file('ml14fall_train.dat', n_features="12810")
     x_test, y_test = datasets.load_svmlight_file('ml14fall_test1_no_answer.dat', n_features="12810")
     y_train = y_train.astype(int)
+    for i in range(22, 32):
+        y_train[y_train == i] = i-10
 
     # algorithm: random forest
     random_for = ensemble.RandomForestClassifier()
