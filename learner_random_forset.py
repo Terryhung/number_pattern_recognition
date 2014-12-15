@@ -1,6 +1,5 @@
-from sklearn import ensemble
+from sklearn import ensemble, datasets, grid_search
 import numpy as np
-from sklearn import datasets
 
 if __name__ == "__main__":
     # data pre
@@ -9,7 +8,10 @@ if __name__ == "__main__":
     y_train = y_train.astype(int)
 
     # algorithm: random forest
-    clf = ensemble.RandomForestClassifier()
+    random_for = ensemble.RandomForestClassifier()
+    parameters = {'n_estimators': [10, 20, 30]}
+    clf = grid_search.GridSearchCV(random_for, parameters)
     clf.fit(X_train.toarray(), y_train)
-    y_predict = clf.predict(x_test)
-    np.savetxt("regression.txt", y_predict, fmt="%s", newline='\n')
+    print clf.best_params_
+    y_predict = clf.best_estimator_.predict(x_test.toarray())
+    np.savetxt("forset.txt", y_predict, fmt="%s", newline='\n')
