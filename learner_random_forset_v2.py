@@ -16,4 +16,4 @@ if __name__ == "__main__":
     clf.fit(X_train.toarray(), y_train)
     print clf.best_params_
     y_predict = clf.best_estimator_.predict(x_test.toarray())
-    np.savetxt("forset.txt", y_predict, fmt="%s", newline='\n')
+    np.savetxt("forset_v2.txt", y_predict, fmt="%s", newline='\n')
