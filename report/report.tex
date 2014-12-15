@@ -71,20 +71,29 @@
 \begin{enumerate}
     \item Algorithm:
       \begin{enumerate}
-          \item Logistic Regression \\
-            params: \\
-            \text{C=1.0, class\_weight=None, dual=False, fit\_intercept=True, intercept\_scaling=1, penalty='l2' \\}
-            \text{E\_in}: 0.015 \\
-            E\_out: 0.82
-          \item Ridge Regression
-            alphas=array[  0.1,   1.,  10. ], class\_weight=None, cv=None, fit\_intercept=True, loss\_func=None, normalize=False \\
-            E\_out: 0.87 \\
+        \item {\em Logistic Regression:\/}\\
+           \underline{params:} \\
+            C = 1.0, class\_weight = None, dual = False, fit\_intercept = True, intercept\_scaling = 1, penalty = ``L2''\\
+            \underline{E\_in}: 0.015 \\
+            \underline{track 0: E\_out}: 0.82
+          \item {\em Ridge Regression:\/} \\
+            \underline{params:} \\
+            alphas=array[  0.1,   1.,  10. ], class\_weight = None, cv = None, fit\_intercept = True, loss\_func = None, normalize = False \\
+            \underline{track 0: E\_out}: 0.87 \\
+          \item {\em Random Forset:\/} \\
+            \underline{params:} \\
+            number of tree: 30 \\
+            \underline{track 0: E\_out}: 0.75
       \end{enumerate}
-    \item Feature Extraction:
+    \item Feature Extraction[TODO]:
       \begin{enumerate}
           \item Hog
       \end{enumerate}
 
+    \item Grid Search
+      \begin{enumerate}
+        \item For Random Forset number of tree = [10, 20, 30]
+      \end{enumerate}
 \end{enumerate}
 
 \end{document}
