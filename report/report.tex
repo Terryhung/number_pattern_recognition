@@ -69,31 +69,65 @@
 \section{12/15}
 \subsection{First time commit}
 \begin{enumerate}
-    \item Algorithm:
+  \item \textbf{Algorithm}:
       \begin{enumerate}
         \item {\em Logistic Regression:\/}\\
            \underline{params:} \\
             C = 1.0, class\_weight = None, dual = False, fit\_intercept = True, intercept\_scaling = 1, penalty = ``L2''\\
-            \underline{E\_in}: 0.015 \\
-            \underline{track 0: E\_out}: 0.82
+            {\color{red}{track 0: E\_out}: 0.82}
           \item {\em Ridge Regression:\/} \\
             \underline{params:} \\
             alphas=array[  0.1,   1.,  10. ], class\_weight = None, cv = None, fit\_intercept = True, loss\_func = None, normalize = False \\
-            \underline{track 0: E\_out}: 0.87 \\
+            {\color{red}{track 0: E\_out}: 0.87} \\
           \item {\em Random Forset:\/} \\
             \underline{params:} \\
-            number of tree: 30 \\
-            \underline{track 0: E\_out}: 0.75
+            number of tree: 100 \\
+            {\color{red}{track 0: E\_out}: 0.72}
       \end{enumerate}
-    \item Feature Extraction[TODO]:
+    \item \textbf{Feature Extraction}:
       \begin{enumerate}
-          \item Hog
+        \item Hog[TODO]
       \end{enumerate}
 
-    \item Grid Search
+    \item \textbf{Resize Class}:\\
+      Resize class 32 to 22\\
+      let 大寫數字class =  小寫數字class
+    \item \text{Grid Search}
       \begin{enumerate}
-        \item For Random Forset number of tree = [10, 20, 30]
+        \item {\em Random Forset\/}\\ 
+          number of tree = [10, 20, 30, 50, 60, 70, 80, 90, 100]
       \end{enumerate}
 \end{enumerate}
 
+\section{12/16}
+\subsection{Try SVM and Random Forset}
+\begin{enumerate}
+  \item \textbf{Algorithm}:
+      \begin{enumerate}
+          \item {\em Random Forset:\/} \\
+            \underline{params:} \\
+            number of tree: 600, max\_features: log2(n\_features)\\
+            {\color{red}track 0: E\_out: 0.62}
+      \end{enumerate}
+    \item \textbf{Feature Extraction}:
+      \begin{enumerate}
+        \item HOG
+      \end{enumerate}
+    \item \textbf{Resize Class}:\\
+      Resize class 32 to 22\\
+      let 大寫數字class =  小寫數字class
+    \item \textbf{Grid Search}:
+      \begin{enumerate}
+        \item {\em Random Forset\/} \\
+          number of tree = [100, 200, 300, 400, 500, 600, 700, 800]
+        \item {\em SVM with kernel\/}\\
+        parameters = [ \\
+          {C:[1, 10, 100, 1000], kernel: [linear]},\\
+          {C:[1, 10, 100, 1000], gamma: [0.001, 0.0001, 0.1, 0.01], kernel: [rbf]},\\
+          {C:[1, 10, 100, 1000], degree: [2, 3, 4, 5], kernel: [poly]}, \\
+        ]
+        \item {\em linear SVM\/}\\
+        parameters = {C:[0.1, 1, 10, 100, 1000], multi\_class: [ovr, crammer\_singer]}
+      \end{enumerate}
+\end{enumerate}
 \end{document}
