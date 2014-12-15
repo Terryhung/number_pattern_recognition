@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
     # algorithm: random forest
     random_for = ensemble.RandomForestClassifier()
-    parameters = {'n_estimators': [30, 40, 50]}
+    parameters = {'n_estimators': [30, 40, 50], 'max_features': ['log2', 'sqrt'], 'n_jobs': [5]}
     clf = grid_search.GridSearchCV(random_for, parameters)
     clf.fit(X_train.toarray(), y_train)
     print clf.best_params_
