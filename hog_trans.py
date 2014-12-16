@@ -14,15 +14,14 @@ if __name__ == "__main__":
     X_train, y_train = datasets.load_svmlight_file(filename,
                                                    n_features="12810")
     X_train = X_train.toarray()
-
     for data in X_train:
         print("finish")
         data = data.reshape(122, 105)
         fd, hog_image = hog(data, orientations=8, pixels_per_cell=(16, 16),
                             cells_per_block=(1, 1), visualise=True)
-        hog_image.reshape(1, 12810)
+        hog_image = hog_image.reshape(12810,)
         X.append(hog_image)
 
-    X = np.asmatrix(X)
+    X = np.asarray(X)
     save_name = "hog_" + filename
-    datasets.dump_svmlight_file(X, y_train, save_name)
+    datasets.dump_svmlight_file(X, y_train, save_name, )
