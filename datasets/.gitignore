@@ -1,4 +1,4 @@
 *.npy
 .ropeproject
-
+hog_*
 .DS_Store
