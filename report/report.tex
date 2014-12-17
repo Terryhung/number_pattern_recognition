@@ -86,7 +86,7 @@
       \end{enumerate}
     \item \textbf{Feature Extraction}:
       \begin{enumerate}
-        \item Hog[TODO]
+        \item Hog (trying\dots\dots\dots)
       \end{enumerate}
 
     \item \textbf{Resize Class}:\\
@@ -99,6 +99,7 @@
       \end{enumerate}
 \end{enumerate}
 
+\newpage
 \section{12/16}
 \subsection{Try SVM and Random Forset}
 \begin{enumerate}
@@ -108,18 +109,14 @@
             \underline{params:} \\
             number of tree: 600, max\_features: log2(n\_features)\\
             {\color{red}track 0: E\_out: 0.62}
-<<<<<<< HEAD
           \item {\em Random Forset: without resize class \/} \\
-=======
-          \item {\em Random Forset:\/ without resize class} \\
->>>>>>> 186e5585fc4e94ee78f4cdf52cb8f129ac849429
             \underline{params:} \\
             number of tree: 800, max\_features: log2(n\_features)\\
             {\color{red}track 0: E\_out: 0.6}
       \end{enumerate}
     \item \textbf{Feature Extraction}:
       \begin{enumerate}
-        \item HOG
+        \item HOG (trying\dots\dots\dots)
       \end{enumerate}
     \item \textbf{Resize Class}:\\
       Resize class 32 to 22\\
@@ -136,6 +133,28 @@
         ]
         \item {\em linear SVM\/}\\
         parameters = {C:[0.1, 1, 10, 100, 1000], multi\_class: [ovr, crammer\_singer]}
+      \end{enumerate}
+\end{enumerate}
+\newpage
+\section{12/17}
+\subsection{Using HOG feature on Random Forset}
+\begin{enumerate}
+  \item \textbf{Algorithm}:
+      \begin{enumerate}
+          \item {\em Random Forset: with HOG Feature\/} \\
+            \underline{params:} \\
+            number of tree: 800, max\_features: sqrt (n\_features)\\
+            {\color{red}track 0: E\_out: 0.29}
+      \end{enumerate}
+    \item \textbf{Feature Extraction}:
+      \begin{enumerate}
+        \item HOG
+      \end{enumerate}
+    \item \textbf{Grid Search}:
+      \begin{enumerate}
+        \item {\em Random Forset\/} \\
+          number of tree = [500, 600, 700, 800, 900, 1000] \\
+          max\_features = [sqrt, log2]
       \end{enumerate}
 \end{enumerate}
 \end{document}

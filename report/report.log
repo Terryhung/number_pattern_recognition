@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.9.28)  16 DEC 2014 10:31
+This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.9.28)  17 DEC 2014 20:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1020,14 +1020,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 78--82
 
 [1
 
-] [2] (./report.aux) ) 
+] [2] [3] (./report.aux) ) 
 Here is how much of TeX's memory you used:
  17840 strings out of 493938
  386083 string characters out of 6148857
- 418721 words of memory out of 5000000
+ 417721 words of memory out of 5000000
  20955 multiletter control sequences out of 15000+600000
  11028 words of font info for 61 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 46i,6n,49p,576b,316s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 46i,6n,49p,576b,222s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on report.pdf (2 pages).
+Output written on report.pdf (3 pages).
