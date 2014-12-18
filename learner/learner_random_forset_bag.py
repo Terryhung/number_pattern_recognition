@@ -1,6 +1,7 @@
 from sklearn import ensemble, datasets, grid_search
 import numpy as np
 from my_tool import read_data
+from my_tool import add_model
 
 if __name__ == "__main__":
     # data pre
@@ -12,9 +13,14 @@ if __name__ == "__main__":
     # algorithm: random forest
     random_for = ensemble.RandomForestClassifier(n_estimators=870, max_features="sqrt", n_jobs=10)
     bagging = ensemble.BaggingClassifier()
-    parameters = {'n_estimators': range(100, 1000, 15), 'base_estimator': [random_for]}
-    clf = grid_search.GridSearchCV(bagging, parameters, n_jobs=15)
+    parameters = {'n_estimators': range(10, 100, 5), 'base_estimator': [random_for]}
+    clf = grid_search.GridSearchCV(bagging, parameters, n_jobs=10)
     clf.fit(X_train.toarray(), y_train)
     print clf.best_params_
     y_predict = clf.best_estimator_.predict(x_test.toarray())
-    np.savetxt("forset_hog_bag.txt", y_predict, fmt="%s", newline='\n')
+    np.savetxt("../answer/forset_hog_bag.txt", y_predict, fmt="%s", newline='\n')
+
+    # Save model
+    print 'Do you want to save this model? <N | filename>'
+    answer = raw_input()
+    add_model(answer, clf)
