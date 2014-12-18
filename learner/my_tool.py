@@ -28,5 +28,5 @@ def add_model(answer, clf):
                 raise
 
         with open(os.path.join('../models', answer), 'w') as f:
-            f.write(dill.dumps(clf.best_estimator_))
+            f.write(dill.dumps(clf))
             print 'Model written'
