@@ -12,7 +12,7 @@ if __name__ == "__main__":
 
     # algorithm: random forest
     svc = svm.SVR(C=100, kernel="rbf", gamma=0.1)
-    bagging = ensemble.BaggingClassifier(svc, n_estimators=50)
+    bagging = ensemble.BaggingClassifier(svc, n_estimators=10)
 
     bagging.fit(X_train.toarray(), y_train)
     y_predict = bagging.predict(x_test.toarray())
