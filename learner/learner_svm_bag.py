@@ -12,15 +12,13 @@ if __name__ == "__main__":
 
     # algorithm: random forest
     svc = svm.SVR(C=100, kernel="rbf", gamma=0.1)
-    bagging = ensemble.BaggingClassifier()
-    parameters = {'n_estimators': range(10, 100, 5), 'base_estimator': [svc]}
-    clf = grid_search.GridSearchCV(bagging, parameters, n_jobs=10)
-    clf.fit(X_train.toarray(), y_train)
-    print clf.best_params_
-    y_predict = clf.best_estimator_.predict(x_test.toarray())
+    bagging = ensemble.BaggingClassifier(svc, n_estimators=50)
+
+    bagging.fit(X_train.toarray(), y_train)
+    y_predict = bagging.predict(x_test.toarray())
     np.savetxt("../answer/svm_hog_bag.txt", y_predict, fmt="%s", newline='\n')
 
     # Save model
     print 'Do you want to save this model? <N | filename>'
     answer = raw_input()
-    add_model(answer, clf)
+    add_model(answer, bagging)
