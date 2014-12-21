@@ -31,6 +31,7 @@ def add_model(answer, clf):
             f.write(dill.dumps(clf))
             print 'Model written'
 
+
 def load_model(model_name):
     print 'Loading model {0}'.format(model_name)
 
