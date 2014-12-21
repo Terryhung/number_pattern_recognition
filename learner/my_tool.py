@@ -30,3 +30,11 @@ def add_model(answer, clf):
         with open(os.path.join('../models', answer), 'w') as f:
             f.write(dill.dumps(clf))
             print 'Model written'
+
+def load_model(model_name):
+    print 'Loading model {0}'.format(model_name)
+
+    with open(os.path.join('../models', model_name), 'r') as f:
+        encoded_str = f.read()
+
+    return dill.loads(encoded_str)
