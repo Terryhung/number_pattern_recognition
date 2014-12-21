@@ -13,11 +13,11 @@ if __name__ == "__main__":
     # algorithm: random forest
     svc = svm.SVR(C=100, kernel="rbf", gamma=0.1)
     print ("start traning")
-    bagging = ensemble.BaggingClassifier(base_estimator=svc, n_estimators=100, n_jobs=15)
+    bagging = ensemble.BaggingClassifier(base_estimator=svc, n_estimators=50, n_jobs=10)
 
     bagging.fit(X_train.toarray(), y_train)
     y_predict = bagging.predict(x_test.toarray())
-    np.savetxt("../answer/svm_hog_bag.txt", y_predict, fmt="%s", newline='\n')
+    np.savetxt("../answer/svm_kernel_hog_bag.txt", y_predict, fmt="%s", newline='\n')
 
     # Save model
     print 'Do you want to save this model? <N | filename>'
