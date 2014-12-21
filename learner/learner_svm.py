@@ -12,8 +12,8 @@ if __name__ == "__main__":
     # algorithm: svm
     svc = svm.SVC()
     parameters = [
-        {'C': [100],
-         'gamma': [0.1],
+        {'C': range(100,150),
+         'gamma': [0.1, 0.11, 0.12],
          'kernel': ['rbf']},
     ]
     clf = grid_search.GridSearchCV(svc, parameters, n_jobs=10)
