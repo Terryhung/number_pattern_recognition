@@ -13,7 +13,6 @@ if __name__ == "__main__":
     # algorithm: random forest
     clf = ensemble.RandomForestClassifier(n_estimators=870, max_features="sqrt", n_jobs=10)
     clf.fit(X_train.toarray(), y_train)
-    print clf.best_params_
     y_predict = clf.predict(x_test.toarray())
     np.savetxt("../answer/forset_hog.txt", y_predict, fmt="%s", newline='\n')
 
