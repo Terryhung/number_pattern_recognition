@@ -6,40 +6,38 @@ from my_tool import load_model
 
 if __name__ == "__main__":
     # data pre
-    X_train, y_train = datasets.load_svmlight_file(
-        read_data('hog_ml14fall_train.dat'), n_features="12810")
     x_test, y_test = datasets.load_svmlight_file(
         read_data('hog_ml14fall_test1_no_answer.dat'), n_features="12810")
-    y_train = y_train.astype(int)
     print ("Finish loading data")
 
-    # algorithm: svm and linear svm
-    svc_linear = load_model('linear_svm_bagging')
+    # algorithm: svm and linear svm and regression
+    svc_linear_bagging = load_model('linear_svm_bagging')
+    svc_linear = load_model('linear_svm')
     svc_kernel = load_model('svm_kernel')
+    svc_kernel_125 = load_model('svm_kernel_125')
+    linear_regression = load_model('regression')
     print ("Finish loading model")
-   
-   # blending
-    y_linear = svc_linear.predict(X_train).astype(int)
-    # y_kernel = svc_kernel.predict(X_train.toarray())
-    y_kernel = np.loadtxt("svm_pred.txt").astype(int)
-    
-    # start blending
-    print ("start blending model")
-    X_blending = np.vstack((y_linear, y_kernel))
-    X_blending = X_blending.T
-    clf = linear_model.LogisticRegression()
-    clf.fit(X_blending, y_train)
 
     # start blending
     print ("start predict")
-    y_linear_test = svc_linear.predict(x_test).astype(int)
-    # y_kernel_test = svc_kernel.predict(x_test.toarray())
-    y_kernel_test = np.loadtxt("svm_test.txt").astype(int)
-    X_blending_test = np.vstack((y_linear_test, y_kernel_test)).T
-    
-    
+    y_kernel = svc_kernel.predict(x_test)
+    np.savetxt("./blending_data/kernel.txt",
+               y_kernel, fmt="%s", newline='\n')
+    y_kernel_125 = svc_kernel_125.predict(x_test)
+    np.savetxt("./blending_data/kernel_125.txt",
+               y_kernel_125, fmt="%s", newline='\n')
+    y_linear_bagging = svc_linear_bagging.predict(x_test)
+    np.savetxt("./blending_data/linear_bagging.txt",
+               y_linear_bagging, fmt="%s", newline='\n')
+    y_linear = svc_linear.predict(x_test)
+    np.savetxt("./blending_data/linear.txt",
+               y_linear, fmt="%s", newline='\n')
+    y_regression = linear_regression.predict(x_test)
+    np.savetxt("./blending_data/regression.txt",
+               y_regression, fmt="%s", newline='\n')
+    print ("Finish predict")
+
     # err output
-    print ("start test")
-    y_predict = clf.predict(X_blending_test)
-    np.savetxt("../answer/blending_hog.txt",
-               y_predict, fmt="%s", newline='\n')
+    # print ("start test")
+    # np.savetxt("../answer/blending_hog.txt",
+    #             y, fmt="%s", newline='\n')

@@ -1,8 +1,7 @@
 €}q(Ulearner_svm]q(Ux_testqUX_trainqU
 parametersqUclfqUsvcqUanswerqUy_trainq	U	y_predictq
-Uy_testqeUlearner_blending]q(UanswerqUx_testqUX_trainqUy_linearqUclfqU
-svc_linearqU
-svc_kernelqUy_trainqU
-X_blendingqUy_kernelqU	y_predictqUy_testqeUmy_tool]q(U	read_dataqU	save_dataqU	add_modelqU
+Uy_testqeUlearner_blending]q(Uy_kernel_125qUx_testqUy_linearqUlinear_regressionqUsvc_linear_baggingqU
+svc_linearqUy_regressionqU
+svc_kernelqUy_linear_baggingqUy_kernelqUy_testqUsvc_kernel_125qeUmy_tool]q(U	read_dataqU	save_dataqU	add_modelqU
 load_modelqeUlearner_linear]q(Ux_testqUX_trainq Uclfq!Uanswerq"Uy_trainq#Uy_testq$eUtest]q%U	read_dataq&aUlearner_reg]q'(Ux_testq(UX_trainq)U
 parametersq*Uclfq+Uy_trainq,U	y_predictq-Uregq.Uy_testq/eu.
