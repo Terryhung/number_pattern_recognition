@@ -27,7 +27,7 @@ if __name__ == "__main__":
     print ("start blending model")
     X_blending = np.vstack((y_linear, y_kernel))
     X_blending = X_blending.T
-    clf = svm.LinearSVC()
+    clf = linear_model.LogisticRegression()
     clf.fit(X_blending, y_train)
 
     # start blending
