@@ -28,8 +28,9 @@ def add_model(answer, clf):
                 raise
 
         with open(os.path.join('../models', answer), 'w') as f:
-            f.write(dill.dumps(clf.best_estimator_))
+            f.write(dill.dumps(clf))
             print 'Model written'
+
 
 def load_model(model_name):
     print 'Loading model {0}'.format(model_name)

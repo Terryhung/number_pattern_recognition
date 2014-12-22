@@ -1,3 +1,7 @@
 €}q(Utest]qU	read_dataqaUlearner_svm]q(Ux_testqUX_trainqU
 parametersqUclfqUsvcq	Uanswerq
-Uy_trainqU	y_predictqUy_testqeUmy_tool]q(U	read_dataqU	save_dataqU	add_modelqeu.
+Uy_trainqU	y_predictqUy_testqeUmy_tool]q(U	read_dataqU	save_dataqU	add_modelqU
+load_modelqeUlearner_blending]q(UanswerqUx_testqUX_trainqUy_linearqUclfqU
+svc_linearqU
+svc_kernelqUy_trainqU
+X_blendingqUy_kernelqU	y_predictqUy_testqeUlearner_linear]q (Ux_testq!UX_trainq"Uclfq#Uanswerq$Uy_trainq%Uy_testq&eu.
