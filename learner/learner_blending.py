@@ -1,4 +1,4 @@
-from sklearn import ensemble, datasets, svm
+from sklearn import ensemble, datasets, svm, linear_model
 import numpy as np
 from my_tool import read_data
 from my_tool import add_model
@@ -19,20 +19,27 @@ if __name__ == "__main__":
     print ("Finish loading model")
    
    # blending
-    y_linear = svc_linear.predict(X_train)
-    y_kernel = svc_kernel.predict(X_train.toarray())
+    y_linear = svc_linear.predict(X_train).astype(int)
+    # y_kernel = svc_kernel.predict(X_train.toarray())
+    y_kernel = np.loadtxt("svm_pred.txt").astype(int)
     
     # start blending
-    print ("start blending")
-    X_blending = np.vstack((y_linear, y_kernel)).T
-    clf = svm.LinearSVC(X_blending, y_train)
+    print ("start blending model")
+    X_blending = np.vstack((y_linear, y_kernel))
+    X_blending = X_blending.T
+    clf = svm.LinearSVC()
+    clf.fit(X_blending, y_train)
 
+    # start blending
+    print ("start predict")
+    y_linear_test = svc_linear.predict(x_test).astype(int)
+    # y_kernel_test = svc_kernel.predict(x_test.toarray())
+    y_kernel_test = np.loadtxt("svm_test.txt").astype(int)
+    X_blending_test = np.vstack((y_linear_test, y_kernel_test)).T
+    
+    
     # err output
-    y_predict = clf.predict(x_test.toarray())
+    print ("start test")
+    y_predict = clf.predict(X_blending_test)
     np.savetxt("../answer/blending_hog.txt",
                y_predict, fmt="%s", newline='\n')
-
-    # Save model
-    print 'Do you want to save this model? <N | filename>'
-    answer = raw_input()
-    add_model(answer, clf)

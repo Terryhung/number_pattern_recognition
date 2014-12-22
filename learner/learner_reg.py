@@ -13,11 +13,11 @@ if __name__ == "__main__":
     # gird search
     reg = linear_model.LogisticRegression()
     parameters = {'C': [0.01, 0.1, 1, 10]}
-    clf = grid_search.GridSearchCV(reg, parameters, n_jobs=10)
+    clf = grid_search.GridSearchCV(reg, parameters, n_jobs=5)
     clf.fit(X_train, y_train)
 
     # save data and model
     y_predict = clf.best_estimator_.predict(x_test)
-    np.savetxt("../answe/regression.txt", y_predict, fmt="%s", newline='\n')
+    np.savetxt("../answer/regression.txt", y_predict, fmt="%s", newline='\n')
 
     my_tool.add_model("regression", clf.best_estimator_)
