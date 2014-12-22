@@ -16,7 +16,7 @@ if __name__ == "__main__":
     y_forset = np.loadtxt('../answer/forset_hog.txt')
     print ("Finish predict")
     
-    y = np.vstack((y_kernel, y_kernel_125, y_linear_bagging, y_regression, y_forset, y_linear)).T
+    y = np.vstack((y_kernel, y_kernel_125, y_linear_bagging, y_regression, y_forset, y_linear, y_kernel_1)).T
     y_prediction = []
     for i in range(y.shape[0]):
         unique,pos = np.unique(y[i],return_inverse=True)
