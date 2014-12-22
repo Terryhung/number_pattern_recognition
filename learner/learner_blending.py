@@ -8,6 +8,7 @@ if __name__ == "__main__":
     # start blending
     print ("start predict")
     y_kernel = np.loadtxt('./blending_data/svm_test.txt')
+    y_kernel_1 = np.loadtxt('../answer/svm_kernel_hog.txt')
     y_kernel_125 = np.loadtxt('./blending_data/kernel_125.txt')
     y_linear_bagging = np.loadtxt('./blending_data/linear_bagging.txt')
     y_linear = np.loadtxt('../answer/svm_linear_hog.txt')
