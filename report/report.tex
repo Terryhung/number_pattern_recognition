@@ -157,4 +157,43 @@
           max\_features = [sqrt, log2]
       \end{enumerate}
 \end{enumerate}
+\newpage
+\section{12/23}
+\subsection{Start blending and bagging}
+\begin{enumerate}
+  \item \textbf{Algorithm}:
+      \begin{enumerate}
+          \item {\em Random Forset: with HOG Feature\/} \\
+            \underline{params:} \\
+            number of tree: 800, max\_features: sqrt (n\_features)\\
+            {\color{red}track 0: E\_out: 0.29}
+          \item {\em SVM kernel: with HOG Feature\/} \\
+            \underline{params:} \\
+            kernel: rbf, C: 100, \(\gamma: 0.1 \)\\
+            {\color{red}track 0: E\_out: 0.26}
+          \item {\em SVM linear bagging: with HOG Feature\/} \\
+            \underline{params:} \\
+            C: 1 \\
+            {\color{red}track 0: E\_out: 0.27}
+      \end{enumerate}
+    \item \textbf{Feature Extraction}:
+      \begin{enumerate}
+        \item HOG
+      \end{enumerate}
+    \item \textbf{Grid Search}:
+      \begin{enumerate}
+        \item {\em Linear SVM\/} \\
+          C = [0.01 , 0.5, 0.1, 10] \\
+        \item {\em AdaBoost}
+          C = [100 , 200, 300, 400, 500] \\
+      \end{enumerate}
+    \item \textbf{Blending}:
+      \begin{enumerate}
+        \item Random Forset
+        \item SVM
+        \item Linear SVM
+        \item Logistic Regression
+        \item Bagging Linear SVM
+      \end{enumerate}
+\end{enumerate}
 \end{document}
