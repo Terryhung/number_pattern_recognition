@@ -4,6 +4,10 @@ from scipy import misc
 import sys
 def photo_resize(photo, height, width):
     # left
+    left = 0
+    right = 0
+    top = 0
+    down = 0
     for i in range(0, height):
         if np.count_nonzero(photo[i, :]) > 0:
             left = i
@@ -20,9 +24,10 @@ def photo_resize(photo, height, width):
         if np.count_nonzero(photo[:, width-1-i]) > 0:
             down = width-1-i
             break
-    print left
-    print right
-    new_photo = photo[left:right, top:down]
+    if left != right and top != down:
+        new_photo = photo[left:right, top:down]
+    else:
+        new_photo = photo
     return new_photo
 
 
