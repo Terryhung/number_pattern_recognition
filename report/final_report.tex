@@ -1,0 +1,131 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+
+\documentclass[12pt]{article}
+
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+
+\setCJKmainfont{LiHei Pro}
+\XeTeXlinebreaklocale zh
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+% ------ Thm. Def. etc. ---------
+
+% Theorem Styles
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+% Definition Styles
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+% ------ For pasting codes ------
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=C,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+% -----------------------------------
+
+\begin{document}
+
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+
+\title{Machine Learning Final Report}
+\author{洪仲言 B00201015\\
+蔡佳文 B00201025}
+\maketitle
+\section{Algorithm}
+\subsection{Linear Model}
+\begin{enumerate}
+  \item {\em Logistic Regression\/}
+  \item {\em Ridge Regression\/}
+  \item {\em Linear SVM\/}
+\end{enumerate}
+\subsection{NonLinear Model}
+\begin{enumerate}
+  \item {\em SVM\/}
+  \item {\em Random Forest\/}
+  \item {\em CNN\/}
+\end{enumerate}
+\section{Preprocess}
+  \subsection{Photo}
+    \begin{enumerate}
+      \item \large{\em \color{red}Resize\/}\\
+        因為我們看見大家寫的字都東倒西歪的，如果直接將抓下來的資料拿來訓練一定很慘烈。\\
+        所以我們用了兩種方式進行處理。
+        \begin{enumerate}
+          \item 將圖片用一個四邊形逼近，以減少太多空白的部分。只留下四邊形後，接著放大成122*105
+          \item 將圖片用一個四邊形逼近，以減少太多空白的部分。把四邊形移到圖中心。為什麼會想這樣做呢？
+            因為擔心放大後失去字的結構。可能『龍』這個字會因為放大，整團擠在一起。
+        \end{enumerate}
+      \item \large{\em \color{red}HOG\/}\\
+        <<Histograms of Oriented Gradients for Human Detection>>是在2005年CVPR上發表的\\
+        想用這個方法的原因是：就如同論文想要找到人在圖片裡麵和其他物體的互動（車子之類的），那他可是用梯度的方法找到
+        人和車子。那我們是文字，我們拿到的資料裡面只有字還有一堆空白處，所以我們如果成順利找到字，並且將文字和空白分離
+        這樣也許可以解決大家同樣的字在122*105裡面，出現在不同位子的情況。
+    \end{enumerate}
+  \subsection{Class}
+    \begin{enumerate}
+      \item \large{\em \color{red}合併\/}\\
+        因為在track0上面，一判斷成壹也算是得分，反之亦然。所以我想說可不可以在class上面降維，把所有class > 21的
+        都減掉10。但是結果似乎不太理想，可能令model感到疑惑了。
+    \end{enumerate}
+\section{Bagging and Blending}
+  \subsection{Bagging}
+    \begin{enumerate}
+      \item 對linear svm 進行Bagging 100 參數C: 1 \\
+          效果不錯 0.28 $ \to $ 0.267
+      \item 對kernel svm 進行Bagging 100  參數$ \text{kernel: rbf, C: 100,} \gamma \text{: 0.1} $\\
+          實驗進行到一半\dots\dots 收到網管的信memory leaks QQ ，雖然比賽很重要
+          ，但是跟實驗室學長姐的感情也很重要所以忍痛放棄這個實驗。
+      \item 對ramdom forest 進行 Bagging 100 參數 870顆樹\\
+          Random Forest 本身就是一個Bagging的演算法了，想說試試看會不會發生什麼怪異的事情，但是
+          跑了好久還沒跑完，所以在四天後放棄這個探險。
+    \end{enumerate}
+  \subsection{Blending}
+    \begin{enumerate}
+      \item 對進行公平投票的方法，看哪個過半數，如果都沒有的話，隨機選一個答案\\
+        <{\em SVM:\/} kernel=rbf C=125 $ \gamma = 0.12 $>\\ 
+        <{\em Random Forest:\/} tree=870 max\_feature=sqrt> \\
+        <{\em SVM linear:\/} c=1 bagging=100>\\
+        成果有進步 0.24 (三個臭皮匠勝過一個臭皮匠)
+      \item 對進行公平投票的方法，看哪個過半數，如果都沒有的話，選一個較多的，如果有一樣票數最多的，在隨機選一個\\
+        <{\em SVM:\/} kernel=rbf C=125 $ \gamma = 0.12 $>\\ 
+        <{\em Random Forest:\/} tree=870 max\_feature=sqrt> \\
+        <{\em SVM linear:\/} c=1 bagging=100>\\
+        <{\em Logistic regression:\/} c=1>\\
+        <{\em Ridge regression:\/} c=10>\\
+        成果有進步 0.25 但是相較於上一個Blending竟然退步了，可能是因為人多口雜，好的事情被淹沒了
+    \end{enumerate}
+\end{document}

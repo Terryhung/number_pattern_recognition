@@ -20,9 +20,10 @@ def photo_resize(photo, height, width):
         if np.count_nonzero(photo[:, width-1-i]) > 0:
             down = width-1-i
             break
-    print left
-    print right
-    new_photo = photo[left:right, top:down]
+    try:
+        new_photo = photo[left:right, top:down]
+    except:
+        misc.imsave('t.jpg', photo)
     return new_photo
 
 
@@ -37,13 +38,9 @@ if __name__ == "__main__":
     X_train, y_train = datasets.load_svmlight_file(filename,
                                                    n_features="12810")
     X_train = X_train.toarray()
-    for data in X_train:
-        data = data.reshape(122, 105)
-        new_photo = photo_resize(data, 122, 105)
-        new_photo = misc.imresize(new_photo, (122, 105))
-        new_photo = new_photo.reshape(12810,)
-        X.append(new_photo)
-        print("finish")
-    X = np.asarray(X)
-    save_name = "new_" + filename
-    datasets.dump_svmlight_file(X, y_train, save_name)
+    count = 0
+    fileopen = open('train_val.txt', 'w')
+    for index, data in enumerate(X_train):
+        photo = "image_" + str(index) + '.jpg'
+        route = 'data/my_photo/' + photo + ' ' + str(y_train[index]) + '\n'
+        fileopen.write(route)
