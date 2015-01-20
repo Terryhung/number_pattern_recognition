@@ -4,4 +4,5 @@ Uy_testqeUlearner_blending]q(Uy_kernel_125qUx_testqUy_linearqUlinear_
 svc_linearqUy_regressionqU
 svc_kernelqUy_linear_baggingqUy_kernelqUy_testqUsvc_kernel_125qeUmy_tool]q(U	read_dataqU	save_dataqU	add_modelqU
 load_modelqeUlearner_linear]q(Ux_testqUX_trainq Uclfq!Uanswerq"Uy_trainq#Uy_testq$eUtest]q%(UXUphoto_resizeq&U	testphotoq'eUlearner_reg]q((Ux_testq)UX_trainq*U
-parametersq+Uclfq,Uy_trainq-U	y_predictq.Uregq/Uy_testq0eUlearner_bag_logis]q1(Ux_testq2UX_trainq3Uclfq4Uregq5Uy_trainq6U	y_predictq7Uy_testq8eu.
+parametersq+Uclfq,Uy_trainq-U	y_predictq.Uregq/Uy_testq0eUlearner_pca]q1(Ux_testq2UX_trainq3Uclfq4Uy_trainq5Uy_testq6eUlearner_bag_logis]q7(h3h2h4Uregq8h5U	y_predictq9U
+cs_err_arrq:h6eu.
