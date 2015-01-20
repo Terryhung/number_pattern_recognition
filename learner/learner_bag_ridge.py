@@ -13,14 +13,14 @@ if __name__ == "__main__":
     print ("Finish loading")
 
     # logistic regression
-    reg = linear_model.LogisticRegression()
+    reg = linear_model.RidgeClassifier(alpha=10)
     reg.fit(X_train, y_train)
     y_predict = reg.predict(x_test)
     print sum((y_predict - y_test) != 0)/y_test.shape[0]
 
     # logistic regression bagging
     clf = ensemble.BaggingClassifier(
-        base_estimator=linear_model.LogisticRegression(),
+        base_estimator=linear_model.RidgeClassifier(alpha=10),
         n_estimators=100,
         oob_score=True,
         n_jobs=10,
