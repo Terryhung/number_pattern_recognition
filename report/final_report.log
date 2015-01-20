@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.9.28)  20 JAN 2015 21:38
+This is XeTeX, Version 3.1415926-2.5-0.9999.3 (TeX Live 2013) (format=xelatex 2013.9.28)  21 JAN 2015 02:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1011,14 +1011,18 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 ] [2]
-[3] (./final_report.aux) ) 
-Here is how much of TeX's memory you used:
- 17898 strings out of 493938
- 388464 string characters out of 6148857
- 423727 words of memory out of 5000000
- 21011 multiletter control sequences out of 15000+600000
- 11044 words of font info for 63 fonts, out of 8000000 for 9000
- 1144 hyphenation exceptions out of 8191
- 46i,15n,49p,582b,321s stack positions out of 5000i,500n,10000p,200000b,80000s
+File: ./photo44.jpg Graphic file (type QTm)
 
-Output written on final_report.pdf (3 pages).
+<use  "./photo44.jpg" >
+File: ./photo228.jpg Graphic file (type QTm)
+ <use  "./photo228.jpg" > [3] [4] (./final_report.aux) ) 
+Here is how much of TeX's memory you used:
+ 17930 strings out of 493938
+ 389486 string characters out of 6148857
+ 424727 words of memory out of 5000000
+ 21038 multiletter control sequences out of 15000+600000
+ 11052 words of font info for 64 fonts, out of 8000000 for 9000
+ 1144 hyphenation exceptions out of 8191
+ 46i,13n,49p,582b,312s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on final_report.pdf (4 pages).

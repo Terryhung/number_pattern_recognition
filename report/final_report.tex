@@ -79,7 +79,7 @@
   \item {\em CNN\/}
 \end{enumerate}
 \section{Preprocess}
-\subsection{Photo}
+\subsection{Image}
 \begin{enumerate}
   \item \large{\em \color{red}Resize\/}\\
     因為我們看見大家寫的字都東倒西歪的，如果直接將抓下來的資料拿來訓練一定很慘烈。\\
@@ -94,6 +94,12 @@
     想用這個方法的原因是：就如同論文想要找到人在圖片裡麵和其他物體的互動（車子之類的），那他可是用梯度的方法找到
     人和車子。那我們是文字，我們拿到的資料裡面只有字還有一堆空白處，所以我們如果成順利找到字，並且將文字和空白分離
     這樣也許可以解決大家同樣的字在122*105裡面，出現在不同位子的情況。
+  \item \large{\em \color{red}Scan Line\/}\\
+    因為我們想處理的資料是中文字，如同大家所知道的，中文字是以字根或筆劃所構成，我們便嘗試以此為出發點之一。
+    然而對字根的辨別太過困難，幾乎等同於對於較小的資料作中文字辨識，相當困難，故我們選用筆劃作為特徵。
+    一個中文字的筆劃有許多方向，且多是接近直線，如「大」字就有三個方向的略為彎曲筆劃。我們就以圖中出現的各個方向的直線線段作為特徵。
+    例如 $L = \text{圖片} \cup \text{某直線線段}$, 則基於此直線線段的特徵為$f(L) = \frac{\sqrt{\sum len(l_i)^2}}{len(L)}$, 其中 $l_i$ 為直線線段上的連續白色子線段(即有與字重疊的部份)。
+    我們希望能透過筆劃與筆劃之間的關聯，使的機器學習到「字」的樣子，進而在結果上有好的表現。
 \end{enumerate}
 \subsection{Class}
 \begin{enumerate}
@@ -127,13 +133,28 @@
     <{\em Logistic regression:\/} c=1>\\
     <{\em Ridge regression:\/} c=10>\\
     成果有進步 0.25 但是相較於上一個Blending竟然退步了，可能是因為人多口雜，好的事情被淹沒了
+  \item 對進行公平投票的方法，看哪個過半數，如果都沒有的話，選一個較多的，如果有一樣票數最多的，在隨機選一個\\
+    <{\em SVM:\/} kernel=rbf C=125 $ \gamma = 0.12 $>\\ 
+    <{\em SVM:\/} kernel=rbf C=100 $ \gamma = 0.12 $>\\ 
+    <{\em Random Forest:\/} tree=870 max\_feature=sqrt> \\
+    <{\em SVM linear:\/} c=1 bagging=100>\\
+    <{\em SVM linear:\/} c=1 >\\
+    <{\em Logistic regression:\/} c=1>\\
+    <{\em Ridge regression:\/} c=10>\\
+    成果沒進步 0.29 但是相較於上一個Blending竟然退步了，果然太多臭皮匠會讓事情變糟
 \end{enumerate}
 \section{BestResult Result}
-最後發現還是一開始的資料然後使用HOG的效果最好。\\
-反而我自己Resize後在用HOG的效果沒那麼好，可能是因為我的Resize讓原本的資料壞形狀了。\\
-一開始Random Forest是表現最好的，不做HOG時可以到0.65其他演算法都在0.8~0.7遊蕩。\\
-但是一做HOG之後，SVM展現自己的價值，馬上變成最強的演算法了。
-\begin{table}[h]
+經過一連串的時候發現還是原始的資料搭配使用HOG的效果最好。
+反而我自己Resize後在使用HOG的效果沒那麼好，可能是因為我的Resize用壞原本的資料形狀了。\\
+而在原始資料上做Random Forest是表現最好的，不做HOG時可以到0.65其他演算法都在0.7~0.8遊蕩。
+Overfitting非常嚴重，我認為是因為在為處理的data非常雜亂。光看『一』這個字:\\
+\includegraphics[width=1.5cm, height=1.5cm]{./photo44.jpg}一個寫在正中間\\
+\includegraphics[width=1.5cm, height=1.5cm]{./photo228.jpg}一個寫到天上去了\\
+這樣子實在會讓演算法學不懂，因為對他們來說一個像素是一個feature所以如果演算法學到在100到110之間有值是『一』。那寫在不同位子的『一』可能會讓演算法誤判\\
+但是一做HOG之後，都用向量表示，這樣子雜訊就變少，而SVM展現自己的價值，馬上變成最強的演算法了。
+
+\subsection{For each algorithm with HOG}
+\scalebox{0.8}{
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
 \textbf{algorithm/with hog}                                                  & \textbf{c}   & \textbf{gamma} & \textbf{kernel} & \textbf{bagging} & \textbf{tree} & \textbf{e\_out} \\ \hline
@@ -141,10 +162,18 @@
 \textbf{LinearSVM}                                                           & \textbf{10}  & \textbf{}      & \textbf{}       & \textbf{}        & \textbf{}     & \textbf{0.284}  \\ \hline
 \textbf{LinearSVM}                                                           & \textbf{10}  & \textbf{}      & \textbf{}       & \textbf{100}     & \textbf{}     & \textbf{0.27}   \\ \hline
 \textbf{LogisticRegression}                                                  & \textbf{10}  & \textbf{}      & \textbf{}       & \textbf{}        & \textbf{}     & \textbf{0.29}   \\ \hline
-\textbf{RidgeRegression}                                                     & \textbf{}    & \textbf{}      & \textbf{}       & \textbf{}        & \textbf{}     & \textbf{}       \\ \hline
+\textbf{RidgeRegression}                                                     & \textbf{alpha=10}    & \textbf{}      & \textbf{}       & \textbf{}        & \textbf{}     & \textbf{0.39}       \\ \hline
 \textbf{RandomForest}                                                        & \textbf{}    & \textbf{}      & \textbf{}       & \textbf{}        & \textbf{870}  & \textbf{0.28}   \\ \hline
-\textbf{RF+SVM+Log}                                                          & \textbf{}    & \textbf{}      & \textbf{}       & \textbf{}        & \textbf{}     & \textbf{0.24}   \\ \hline
-\textbf{\begin{tabular}[c]{@{}l@{}}RF+SVM+Log+Rid\\ +LinearSVM\end{tabular}} & \textbf{}    & \textbf{}      & \textbf{}       & \textbf{}        & \textbf{}     & \textbf{0.24}   \\ \hline
 \end{tabular}
-\end{table}
+}
+
+\subsection{For each blending}
+\scalebox{0.8}{
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Blending}                                                                                                   & \textbf{e\_out} \\ \hline
+\textbf{RF+SVM+LinearSVM}                                                                                           & \textbf{0.24}   \\ \hline
+\textbf{RF+SVM+LinearSVM+LogisticReg+RidgeReg}                                                                      & \textbf{0.25}   \\ \hline
+\textbf{\begin{tabular}[c]{@{}l@{}}RF+SVM+SVM\_c=125+LinearSVM+LinearSVM\_bag\\ +LogisticReg+RidgeReg\end{tabular}} & \textbf{0.29}   \\ \hline
+\end{tabular}}
 \end{document}
